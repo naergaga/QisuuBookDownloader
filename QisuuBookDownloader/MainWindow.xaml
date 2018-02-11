@@ -9,10 +9,12 @@
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Button DockPanel.Dock="Right">下载</Button>
-                <TextBox></TextBox>
+                <Button DockPanel.Dock="Right" Click="Button_Click">下载</Button>
+                <TextBox Name="TbUrl"></TextBox>
             </DockPanel>
-            <TextBlock></TextBlock>
+            <ScrollViewer>
+                <TextBlock Name="TbInfo" TextWrapping="Wrap"></TextBlock>
+            </ScrollViewer>
         </DockPanel>
     </Grid>
 </Window>

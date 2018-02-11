@@ -15,8 +15,8 @@ namespace QisuuBookDownloader.Data.Services
             StreamWriter writer = new StreamWriter(path);
             foreach (var item in book.Chapters)
             {
-                writer.Write(item.Title);
-                writer.Write(item.Content);
+                writer.WriteLine(item.Title);
+                writer.WriteLine(item.Content);
             }
             writer.Close();
             writer.Dispose();

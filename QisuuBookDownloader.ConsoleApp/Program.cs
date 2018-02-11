@@ -14,8 +14,7 @@ namespace QisuuBookDownloader.ConsoleApp
         static void Main(string[] args)
         {
             GetBookTask task = new GetBookTask();
-            var t = task.Get("https://www.qisuu.com/du/36/36885/");
-            var book = t.GetAwaiter().GetResult();
+            var book = task.Get("https://www.qisuu.com/du/36/36885/");
             BookMerge merge = new BookMerge();
             merge.Merge(book, "test.txt");
         }

@@ -13,7 +13,7 @@ namespace QisuuBookDownloader.Test
         public void GetFetchChapter()
         {
             GetBookTask task = new GetBookTask();
-            task.Get1(File.ReadAllText(@"C:\Users\mei\Desktop\放开那个女巫.html"));
+            //task.Get1(File.ReadAllText(@"C:\Users\mei\Desktop\放开那个女巫.html"));
         }
 
         [TestMethod]
