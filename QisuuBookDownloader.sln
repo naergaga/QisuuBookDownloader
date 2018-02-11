@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QisuuBookDownloader", "QisuuBookDownloader\QisuuBookDownloader.csproj", "{66C427D2-2BC7-4ECE-8E9D-19AE47491487}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QisuuBookDownloader.Test", "QisuuBookDownloader.Test\QisuuBookDownloader.Test.csproj", "{3D1B3154-746F-4FE9-B109-7389A9471461}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QisuuBookDownloader.ConsoleApp", "QisuuBookDownloader.ConsoleApp\QisuuBookDownloader.ConsoleApp.csproj", "{B3B3214C-4F06-4F77-8D4D-C7E95D67FF48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{66C427D2-2BC7-4ECE-8E9D-19AE47491487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66C427D2-2BC7-4ECE-8E9D-19AE47491487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66C427D2-2BC7-4ECE-8E9D-19AE47491487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D1B3154-746F-4FE9-B109-7389A9471461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D1B3154-746F-4FE9-B109-7389A9471461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D1B3154-746F-4FE9-B109-7389A9471461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D1B3154-746F-4FE9-B109-7389A9471461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B3214C-4F06-4F77-8D4D-C7E95D67FF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B3214C-4F06-4F77-8D4D-C7E95D67FF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B3214C-4F06-4F77-8D4D-C7E95D67FF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B3214C-4F06-4F77-8D4D-C7E95D67FF48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
