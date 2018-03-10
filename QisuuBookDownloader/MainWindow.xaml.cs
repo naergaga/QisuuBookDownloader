@@ -49,7 +49,7 @@ namespace QisuuBookDownloader
                 BookMerge merge = new BookMerge();
                 Log("开始合并");
                 Directory.CreateDirectory("txt");
-                var fileName = "txt\\"+System.IO.Path.GetRandomFileName() + ".txt";
+                var fileName = "txt\\"+book.Name + ".txt";
                 merge.Merge(book, fileName);
                 Log($"下载完成 {fileName}");
             });

@@ -11,14 +11,13 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 
 namespace QisuuBookDownloader.Data.Tasks
 {
     public class GetBookTask
     {
         private WebClient wc;
-        private Encoding encoding= Encoding.UTF8;
+        private Encoding encoding = Encoding.UTF8;
         public ILogger Logger { get; set; }
 
         public GetBookTask()
@@ -29,15 +28,14 @@ namespace QisuuBookDownloader.Data.Tasks
         public Book Get(string url)
         {
             var str = encoding.GetString(wc.DownloadData(url));
-            var list = GetChapterUrls(str, url);
-            var book = new Book { Chapters = list, Url = url };
-            FetchChapters(list);
+            var book = ParseBookHtml(str, url);
+            FetchChapters(book.Chapters);
             return book;
         }
 
         public string GetString(byte[] data)
         {
-            GZipStream stream = new GZipStream(new MemoryStream(data),CompressionMode.Decompress);
+            GZipStream stream = new GZipStream(new MemoryStream(data), CompressionMode.Decompress);
             StreamReader sr = new StreamReader(stream);
             return sr.ReadToEnd();
         }
@@ -47,7 +45,16 @@ namespace QisuuBookDownloader.Data.Tasks
             foreach (var ch in list)
             {
                 Logger?.Log($"正在下载 {ch.Title}");
-                FetchChapter(ch);
+                while (true) {
+                    try { 
+                    FetchChapter(ch);
+                    }catch(Exception ex)
+                    {
+                        Logger.Log(ex.Message);
+                        continue;
+                    }
+                    break;
+                }
                 Logger?.Log($"下载完成 {ch.Title}");
             }
         }
@@ -61,22 +68,31 @@ namespace QisuuBookDownloader.Data.Tasks
 
         private void FetchChapter(Chapter ch)
         {
+            //下载html
             var data = wc.DownloadData(ch.Url);
             var str = encoding.GetString(data);
-            try {
-                ch.Content = ChapterContent.Get(str);
-            } catch (Exception ex)
+            try
             {
-                ch.Content = GetString(data);
+                ch.Content = ChapterContent.Get(str);
+            }
+            catch (Exception ex)
+            {
+                ch.Content = ChapterContent.Get(GetString(data));
             }
         }
 
-        public List<Chapter> GetChapterUrls(string str, string url)
+        public Book ParseBookHtml(string str, string url)
         {
+            var book = new Book { Url = url };
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(str);
+
+            var nameNode = doc.DocumentNode.SelectSingleNode("//*[@id='info'][1]/div[1]/div[2]/h1");
+            var authorNode = doc.DocumentNode.SelectSingleNode("//*[@id='info'][1]/div[1]/div[2]/dl[1]");
             var links = doc.DocumentNode.SelectNodes(@"//*[@id='info'][3]/div[1]/ul/li/a");
-            List<Chapter> list = new List<Chapter>();
+            book.Author = authorNode.InnerText.Replace("&nbsp;", "");
+            book.Name = nameNode.InnerText;
+            book.Chapters = new List<Chapter>();
             foreach (var link in links)
             {
                 Chapter ch = new Chapter
@@ -84,9 +100,9 @@ namespace QisuuBookDownloader.Data.Tasks
                     Title = link.InnerText,
                     Url = url + link.Attributes["href"].Value
                 };
-                list.Add(ch);
+                book.Chapters.Add(ch);
             }
-            return list;
+            return book;
         }
     }
 }

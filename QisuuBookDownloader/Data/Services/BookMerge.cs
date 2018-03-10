@@ -13,6 +13,10 @@ namespace QisuuBookDownloader.Data.Services
         public void Merge(Book book,string path)
         {
             StreamWriter writer = new StreamWriter(path);
+            writer.WriteLine(book.Name);
+            writer.WriteLine();
+            writer.WriteLine(book.Author);
+            writer.WriteLine();
             foreach (var item in book.Chapters)
             {
                 writer.WriteLine(item.Title);
