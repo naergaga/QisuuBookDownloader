@@ -89,7 +89,7 @@ namespace QisuuBookDownloader.Data.Tasks
 
             var nameNode = doc.DocumentNode.SelectSingleNode("//*[@id='info'][1]/div[1]/div[2]/h1");
             var authorNode = doc.DocumentNode.SelectSingleNode("//*[@id='info'][1]/div[1]/div[2]/dl[1]");
-            var links = doc.DocumentNode.SelectNodes(@"//*[@id='info'][3]/div[1]/ul/li/a");
+            var links = doc.DocumentNode.SelectNodes(@"//div[@class='pc_list']/ul/li/a");
             book.Author = authorNode.InnerText.Replace("&nbsp;", "");
             book.Name = nameNode.InnerText;
             book.Chapters = new List<Chapter>();
