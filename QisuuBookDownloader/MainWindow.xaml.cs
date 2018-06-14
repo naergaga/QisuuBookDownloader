@@ -4,6 +4,7 @@ using QisuuBookDownloader.Data.Tasks;
 using QisuuBookDownloader.Utils.Logger;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -77,5 +78,12 @@ namespace QisuuBookDownloader
             });
         }
 
+        private void BtnOpenOut_Click(object sender, RoutedEventArgs e)
+        {
+            var  path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory , "txt");
+            if (Directory.CreateDirectory(path).Exists==true) {
+                System.Diagnostics.Process.Start(path);
+            }
+        }
     }
 }

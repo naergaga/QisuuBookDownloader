@@ -18,8 +18,8 @@ namespace QisuuBookDownloader.Data.Services
           
                 node = doc.DocumentNode.SelectSingleNode("//*[@id='content1']");
            
-            var str = node.InnerText.Replace("&nbsp;&nbsp;&nbsp;&nbsp;",
-                "    ").Trim().Replace("\r\r", "\r\n");
+            var str = node.InnerText.Trim().Replace("&nbsp;&nbsp;&nbsp;&nbsp;",
+                "\r\n    ");
             return str;
         }
     }

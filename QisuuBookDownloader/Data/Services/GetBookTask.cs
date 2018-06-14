@@ -27,6 +27,7 @@ namespace QisuuBookDownloader.Data.Tasks
 
         public Book Get(string url)
         {
+            url = url.Replace("https://m.", "https://www.");
             var str = encoding.GetString(wc.DownloadData(url));
             var book = ParseBookHtml(str, url);
             FetchChapters(book.Chapters);
